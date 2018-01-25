@@ -9,18 +9,18 @@ const Colour BACKGROUND = 0xf0f0f0;
 const Colour BLACK = 0;
 
 class Renderer{
-	
+    
 public:
-	Renderer(Object*, Buffer, int, int);
-	void render(int,int,int);
+    Renderer(Object*, Buffer, int, int);
+    void render(int,int,int);
 private:
-	Buffer buffer;
-	Object* object;
-	int height, width;
-	void plot(int, int, Colour);
-	void fillBuffer(Colour);
-	void drawLine(Colour, int, int, int, int);
-	void drawTestPattern();
+    Buffer buffer;
+    Object* object;
+    int height, width;
+    void plot(int, int, Colour);
+    void fillBuffer(Colour);
+    void drawLine(Colour, int, int, int, int);
+    void drawTestPattern();
 };
 
 #endif
