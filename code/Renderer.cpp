@@ -37,15 +37,27 @@ void Renderer::render(int scale, int xoff, int yoff){
 
 
 //returns 1 if x>0, -1 if x<0, 0 otherwise
-int sign(int x){
+static inline int sign(int x){
     
     return (0<x) - (0>x);
+    
+}
+
+static inline int clamp(int x, int min, int max){
+    
+    return x < min ? min : ( x > max ? max : x);
     
 }
 
 //Plots a line of specified colour from (x0, y0) to (x1, y1) using adaptation
 // of Bresenham's line algorithm
 void Renderer::drawLine(Colour colour, int x0, int y0, int x1, int y1){
+    
+    //prevent drawing off screen
+    x0 = clamp(x0,0,width-1);
+    x1 = clamp(x1,0,width-1);
+    y0 = clamp(y0,0,height-1);
+    y1 = clamp(y1,0,height-1);
     
     /*Algorithm only works for gradient magnitude of 1 or less
       To draw lines of gradient magnitude greater than 1, x and y must
@@ -116,8 +128,6 @@ void Renderer::fillBuffer(Colour colour){
 
 //Sets the colour of pixel in buffer at (x,y)
 void Renderer::plot(int x, int y, Colour colour){
-    
-    //TODO prevent memory access violation when plotting out of bounds
     
     Colour* pixel = (Colour*)buffer;
     pixel += x + (width * y);
